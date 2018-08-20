@@ -1,0 +1,30 @@
+{
+  "persons": [
+    {
+      "name": "Paul",
+      "phone": [
+        {
+          "type": "home",
+          "value": "+49 0000 0000"
+        },
+        {
+          "type": "work",
+          "value": "+49 0000 0000"
+        }
+      ]
+    },
+    {
+      "name": "Peter",
+      "phone": [
+        {
+          "type": "home",
+          "value": "+49 0000 0000"
+        },
+        {
+          "type": "work",
+          "value": "+49 0000 0000"
+        }
+      ]
+    }
+  ]
+}

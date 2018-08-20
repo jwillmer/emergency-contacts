@@ -1,0 +1,141 @@
+html {
+    color: #fff;
+    font-size: 1em;
+    line-height: 1.4;
+    background-color: #202124;
+}
+
+body {
+    font-family: Roboto,sans-serif;
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+}
+
+.hide, template {
+    display: none !important;
+}
+
+.error-message {
+    display: inline-flex;
+    align-items: center;
+}
+
+#decrypt .authenticate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.encrypt-form, .encrypted-container {
+    width: 100%;
+    max-width: 600px;
+}
+
+.person:not(template) {
+    width: 100%;
+    max-width: 300px;
+}
+
+.encrypted-content {
+    overflow-wrap: break-word;
+    max-height: 50vh;
+    overflow: auto;
+}
+
+.encrypted-container button {
+    padding: 5px 10px;
+    margin: 5px 0;
+}
+
+.encrypt-form, .decrypt-form, .person:not(template) {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    border-radius: 2px;
+    margin: 1rem;
+    background-color: #344955;
+    height: 100%;
+}
+
+    .encrypt-form .footer {
+        display: flex;
+        justify-content: space-between;
+    }
+
+        .encrypt-form .footer .actions {
+            display: flex;
+        }
+
+.encrypted-container .footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+input, textarea, button {
+    background-color: #B4C1CC;
+    border: none;
+    border-bottom: 1px solid #202124;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 2px;
+    color: black;
+}
+
+label, .error, .title {
+    margin: 5px;
+}
+
+input {
+    text-align: center;
+}
+
+textarea {
+    min-height: 15rem;
+}
+
+.phone-numbers {
+    display: flex;
+    flex-direction: column;
+}
+
+.phone {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    align-items: center;
+    padding: 5px 0;
+    color: white;
+    text-decoration: none;
+}
+
+.phone:last-child {
+    margin-bottom: 0;
+}
+
+.person .name {
+    font-size: larger;
+    border-bottom: 1px solid rgba(180, 193, 204, 0.35);
+}
+
+#content {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-evenly;
+}
+
+#decrypt .actions {
+    display: flex;
+    flex-direction: column;
+}
+
+    a.page-link {
+        color: white;
+        text-decoration: none;
+    }
