@@ -1,5 +1,5 @@
 # Emergency Contacts
-A static website with your personal emergency contacts. If you are lost without any of your devise around and you need to call a family member but don't know the number and all your accounts are secured with 2-stop authentication this site can safe your day.
+A static website with your personal emergency contacts. If you are lost without any of your devise around and you need to call a family member but don't know the number and all your accounts are secured with 2-step authentication this site can safe your day.
 
 ## How to setup
 
