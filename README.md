@@ -1,9 +1,9 @@
 # Emergency Contacts
-A static website with your personal emergency contacts. If you are lost without any of your devies around and you need to call a family mamber but don't know the number and all your accounts are secured with 2-stop authentication this site can safe your day.
+A static website with your personal emergency contacts. If you are lost without any of your devise around and you need to call a family member but don't know the number and all your accounts are secured with 2-stop authentication this site can safe your day.
 
 ## How to setup
 
-1) Fork this repository and setup github pages.
+1) Fork this repository and setup GitHub pages.
 
 2) Generate a JSON file with all the contacts that might come in handy [on this page](https://jwillmer.github.io/emergency-contacts/encrypt.html).
 
