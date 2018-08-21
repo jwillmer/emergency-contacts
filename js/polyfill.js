@@ -17,7 +17,7 @@ if (typeof Promise !== 'function') {
     loadJS('js/vendor/promise.js', function () { }, document.body);
 }
 
-if (typeof Crypto !== 'function') {
+if (typeof Crypto !== 'function' || typeof crypto.subtle !== 'function') {
     console.log("Loading crypto polyfill..");
     loadJS('js/vendor/webcrypto.js', function () { }, document.body);
 }
