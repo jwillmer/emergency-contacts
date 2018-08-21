@@ -62,6 +62,7 @@ body {
     margin: 1rem;
     background-color: #344955;
     height: 100%;
+    min-height: 80px; /* Safari */ 
 }
 
     .encrypt-form .footer {

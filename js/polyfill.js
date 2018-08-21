@@ -13,12 +13,12 @@ var loadJS = function (url, implementationCode, location) {
 };
 
 if (!this.fetch) {
-    loadJS('js/vendor/fetch.js', () => { }, document.body);
+    loadJS('js/vendor/fetch.js', function () { }, document.body);
 }
 
 if (typeof TextDecoder === "undefined") {
-    loadJS('js/vendor/encoding-indexes.js', () => { }, document.body);
-    loadJS('js/vendor/encoding.js', () => { }, document.body);
+    loadJS('js/vendor/encoding-indexes.js', function () { }, document.body);
+    loadJS('js/vendor/encoding.js', function () { }, document.body);
 }
 
 if (typeof TextEncoder === "undefined") {

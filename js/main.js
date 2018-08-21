@@ -1,37 +1,54 @@
-const iv = new Uint8Array([1, 0, 7]);
+window.iv = new Uint8Array([1, 0, 7]);
 
-const getJsonContent = async () =>
-    await (await fetch('emergency-information.json')).json();
+(function () {
+    let encrypt = document.querySelector("#encrypt");
+    if (encrypt !== null) {
+        let encryptBtn = document.querySelector(".encrypt-form button");
+        let copyBtn = document.querySelector(".encrypted-container button");
 
-const getJsonTemplateContent = async () =>
-    await (await fetch('emergency-information-template.json')).json();
+        encryptBtn.addEventListener("click", encryptData);
+        copyBtn.addEventListener("click", copyDecryptedJsonToClipboard);
+        InitJsonTemplate();
+    }
 
-const encryptText = async (plainText, password) => {
+    let decrypt = document.querySelector("#decrypt");
+    if (decrypt !== null) {
+        let decryptBtn = document.querySelector(".decrypt-form button");
+        let decryptPaswordInput = document.querySelector(".decrypt-form input");
+        let copyJsonBtn = document.querySelector("#copy-json");
+
+        decryptBtn.addEventListener("click", decryptData);
+        decryptPaswordInput.addEventListener("keypress", function(e) { if (e.key === "Enter") decryptData(); });
+        copyJsonBtn.addEventListener("click", copyEncryptedJsonToClipboard);
+    }
+})();
+
+
+async function getJsonContent() {
+   return await (await fetch('emergency-information.json')).json();
+}
+
+async function getJsonTemplateContent() {
+    return await (await fetch('emergency-information-template.json')).json();
+}
+
+async function encryptText(plainText, password) {
     const ptUtf8 = new TextEncoder().encode(plainText);
 
     const pwUtf8 = new TextEncoder().encode(password);
     const pwHash = await crypto.subtle.digest('SHA-256', pwUtf8);
 
-    const alg = { name: 'AES-GCM', iv: iv };
+    const alg = { name: 'AES-GCM', iv: window.iv };
     const key = await crypto.subtle.importKey('raw', pwHash, alg, false, ['encrypt']);
 
     return new Uint8Array(await crypto.subtle.encrypt(alg, key, ptUtf8));
-};
-
-function isValidJson(json) {
-    try {
-        JSON.parse(json);
-        return true;
-    } catch (e) {
-        return false;
-    }
 }
 
-const decryptText = async (uint8ArrayContent, password) => {
+async function decryptText(uint8ArrayContent, password) {
     const pwUtf8 = new TextEncoder().encode(password);
     const pwHash = await crypto.subtle.digest('SHA-256', pwUtf8);
 
-    const alg = { name: 'AES-GCM', iv: iv };
+    const alg = { name: 'AES-GCM', iv: window.iv };
     const key = await crypto.subtle.importKey('raw', pwHash, alg, false, ['decrypt']);
 
     try {
@@ -39,7 +56,7 @@ const decryptText = async (uint8ArrayContent, password) => {
     } catch (error) {
         return null;
     }
-};
+}
 
 async function encryptData() {
     let password = document.querySelector(".encrypt-form input").value;
@@ -130,27 +147,11 @@ async function InitJsonTemplate() {
     textarea.value = JSON.stringify(json, null, 2);
 }
 
-
-
-(function () {
-    let encrypt = document.querySelector("#encrypt");
-    if (encrypt !== null) {
-        let encryptBtn = document.querySelector(".encrypt-form button");
-        let copyBtn = document.querySelector(".encrypted-container button");
-
-        encryptBtn.addEventListener("click", encryptData);
-        copyBtn.addEventListener("click", copyDecryptedJsonToClipboard);
-        InitJsonTemplate();
+function isValidJson(json) {
+    try {
+        JSON.parse(json);
+        return true;
+    } catch (e) {
+        return false;
     }
-
-    let decrypt = document.querySelector("#decrypt");    
-    if (decrypt !== null) {
-        let decryptBtn = document.querySelector(".decrypt-form button");
-        let decryptPaswordInput = document.querySelector(".decrypt-form input");
-        let copyJsonBtn = document.querySelector("#copy-json");
-
-        decryptBtn.addEventListener("click", decryptData);
-        decryptPaswordInput.addEventListener("keypress", (e) => { if (e.key === "Enter") decryptData(); });
-        copyJsonBtn.addEventListener("click", copyEncryptedJsonToClipboard);
-    }
-})();
+}
