@@ -13,15 +13,18 @@ var loadJS = function (url, implementationCode, location) {
 };
 
 if (!this.fetch) {
+    console.log("Loading fetch polyfill..");
     loadJS('js/vendor/fetch.js', function () { }, document.body);
 }
 
 if (typeof TextDecoder === "undefined") {
+    console.log("Loading TextDecoder polyfill..");
     loadJS('js/vendor/encoding-indexes.js', function () { }, document.body);
     loadJS('js/vendor/encoding.js', function () { }, document.body);
 }
 
 if (typeof TextEncoder === "undefined") {
+    console.log("Loading TextEncoder polyfill..");
     TextEncoder = function TextEncoder() { };
     TextEncoder.prototype.encode = function encode(str) {
         "use strict";
