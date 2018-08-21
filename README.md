@@ -13,7 +13,7 @@ A static website with your personal emergency contacts. If you are lost without 
 
 ## Tooling
 
-The following tool are used to optimize this project.
+The following tools are used to optimize this project.
 
 - [BrowserStack](https://www.browserstack.com/) to test its accessibility. 
 - [Google Lighthouse](https://developers.google.com/web/tools/lighthouse/) to optimize for speed
