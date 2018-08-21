@@ -11,6 +11,18 @@ A static website with your personal emergency contacts. If you are lost without 
 
 4) Visit the [start page](https://jwillmer.github.io/emergency-contacts/index.html) and try it out (demo uses `sos` as password).
 
+## Tested Browsers
+
+| Browser      | Status      | Note                 |
+| ------------ | ----------- | -------------------- |
+| Safari 604   | works       | crypto polyfill      |
+| Safari 602   | not working | missing ES6 support  |
+| Chrome 68    | works       |                      |
+| Chrome 63    | not working | - investigating -    |
+| IE 10        | not working | missing ES6 support  |
+| IE 11        | not working | missing ES6 support  |
+
+
 ## Tooling
 
 The following tools are used to optimize this project.
