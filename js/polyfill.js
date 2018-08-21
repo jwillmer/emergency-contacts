@@ -12,6 +12,16 @@ var loadJS = function (url, implementationCode, location) {
     location.appendChild(scriptTag);
 };
 
+if (typeof Promise !== 'function') {
+    console.log("Loading promise polyfill..");
+    loadJS('js/vendor/promise.js', function () { }, document.body);
+}
+
+if (typeof Crypto !== 'function') {
+    console.log("Loading crypto polyfill..");
+    loadJS('js/vendor/webcrypto.js', function () { }, document.body);
+}
+
 if (!this.fetch) {
     console.log("Loading fetch polyfill..");
     loadJS('js/vendor/fetch.js', function () { }, document.body);
