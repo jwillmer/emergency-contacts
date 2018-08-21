@@ -10,3 +10,13 @@ A static website with your personal emergency contacts. If you are lost without 
 3) Paste the encrypted data into [emergency-information.json](emergency-information.json) and update the repository.
 
 4) Visit the [start page](https://jwillmer.github.io/emergency-contacts/index.html) and try it out (demo uses `sos` as password).
+
+## Tooling
+
+The following tools are used to optimize this project.
+
+- [BrowserStack](https://www.browserstack.com/) to test its accessibility. 
+- [Google Lighthouse](https://developers.google.com/web/tools/lighthouse/) to optimize for speed
+
+[![browserstack](img/browserstack.png)](https://www.browserstack.com/)
+[![lighthouse](img/lighthouse.png)](https://developers.google.com/web/tools/lighthouse/)
