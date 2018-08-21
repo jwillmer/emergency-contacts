@@ -1,41 +1,38 @@
 ﻿<!doctype html>
 <html lang="en-us">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body id="encrypt">
 
-        <link rel="stylesheet" href="css/normalize.min.css">
-        <link rel="stylesheet" href="css/main.css">
-    </head>
-    <body id="encrypt">
-
-        <div class="encrypt-form">
-            <label for="content-area">Content</label>
-            <textarea name="content-area"></textarea>
-            <div class="footer">
-                <div class="error-message"></div>
-                <div class="actions">
-                    <input type="password" placeholder="Password">
-                    <button type="button">Encrypt</button>
-                </div>
+    <div class="encrypt-form">
+        <label for="content-area">Content</label>
+        <textarea name="content-area"></textarea>
+        <div class="footer">
+            <div class="error-message"></div>
+            <div class="actions">
+                <input type="password" placeholder="Password">
+                <button type="button">Encrypt</button>
             </div>
         </div>
+    </div>
 
-        <div class="encrypted-container hide">
-            <div class="encrypted-content"></div>
-            <div class="footer">
-                <button type="button">Copy</button>
-            </div>
+    <div class="encrypted-container hide">
+        <div class="encrypted-content"></div>
+        <div class="footer">
+            <button type="button">Copy</button>
         </div>
+    </div>
 
-        <a class="page-link" href="index.html">Go to decryption</a>
+    <a class="page-link" href="index.html">Go to decryption</a>
 
-
-        <script src="js/vendor/encoding-indexes.js"></script>
-        <script src="js/vendor/encoding.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+    <script src="js/polyfill.js"></script>
+    <script src="js/main.js"></script>
+</body>
 </html>
