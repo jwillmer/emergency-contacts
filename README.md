@@ -18,7 +18,7 @@ A static website with your personal emergency contacts. If you are lost without 
 | Safari 604   | works       | crypto polyfill      |
 | Safari 602   | not working | missing ES6 support  |
 | Chrome 68    | works       |                      |
-| Chrome 63    | not working | - investigating -    |
+| Chrome 63    | works       |                      |
 | IE 10        | not working | missing ES6 support  |
 | IE 11        | not working | missing ES6 support  |
 
