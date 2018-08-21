@@ -13,9 +13,11 @@ A static website with your personal emergency contacts. If you are lost without 
 
 ## Tested Browsers
 
+Note that the website needs to use SSL in order to work.
+
 | Browser      | Status      | Note                 |
 | ------------ | ----------- | -------------------- |
-| Safari 604   | works       | crypto polyfill      |
+| Safari 604   | works       |                      |
 | Safari 602   | not working | missing ES6 support  |
 | Chrome 68    | works       |                      |
 | Chrome 63    | works       |                      |
