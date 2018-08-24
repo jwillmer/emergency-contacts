@@ -76,6 +76,7 @@ async function encryptData() {
         let container = document.querySelector(".encrypted-container");
         let contentElement = container.querySelector(".encrypted-content");
         let content = document.createTextNode(encryptedJson);
+        contentElement.innerHTML = '';
         contentElement.appendChild(content);
         container.classList.remove("hide");
     } else {
