@@ -23,6 +23,7 @@ body {
 .error-message {
     display: inline-flex;
     align-items: center;
+    padding-left: 5px;
 }
 
 #decrypt .authenticate {

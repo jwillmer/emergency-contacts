@@ -1,5 +1,3 @@
-window.iv = new Uint8Array([1, 0, 7]);
-
 (function () {
     let encrypt = document.querySelector("#encrypt");
     if (encrypt !== null) {
@@ -18,14 +16,14 @@ window.iv = new Uint8Array([1, 0, 7]);
         let copyJsonBtn = document.querySelector("#copy-json");
 
         decryptBtn.addEventListener("click", decryptData);
-        decryptPaswordInput.addEventListener("keypress", function(e) { if (e.key === "Enter") decryptData(); });
+        decryptPaswordInput.addEventListener("keypress", function (e) { if (e.key === "Enter") decryptData(); });
         copyJsonBtn.addEventListener("click", copyEncryptedJsonToClipboard);
     }
 })();
 
 
 async function getJsonContent() {
-   return await (await fetch('emergency-information.json')).json();
+    return await (await fetch('emergency-information.json')).json();
 }
 
 async function getJsonTemplateContent() {
@@ -33,46 +31,55 @@ async function getJsonTemplateContent() {
 }
 
 async function encryptText(plainText, password) {
-    const ptUtf8 = new TextEncoder().encode(plainText);
-
-    const pwUtf8 = new TextEncoder().encode(password);
-    const pwHash = await crypto.subtle.digest('SHA-256', pwUtf8);
-
-    const alg = { name: 'AES-GCM', iv: window.iv };
-    const key = await crypto.subtle.importKey('raw', pwHash, alg, false, ['encrypt']);
-
-    return new Uint8Array(await crypto.subtle.encrypt(alg, key, ptUtf8));
+    return await new Promise(
+        function (resolve, reject) {
+            triplesec.encrypt({
+                data: new triplesec.Buffer(plainText),
+                key: new triplesec.Buffer(password)
+            }, function (err, buff) {
+                if (!err) {
+                    return resolve(buff.toString('hex'));
+                }
+                else {
+                    let errorElement = document.querySelector(".encrypt-form .error-message");
+                    errorElement.innerHTML = "Failed due to missing password";
+                    return reject(Error(err.message));;
+                }
+            });
+        }
+    );
 }
 
-async function decryptText(uint8ArrayContent, password) {
-    const pwUtf8 = new TextEncoder().encode(password);
-    const pwHash = await crypto.subtle.digest('SHA-256', pwUtf8);
-
-    const alg = { name: 'AES-GCM', iv: window.iv };
-    const key = await crypto.subtle.importKey('raw', pwHash, alg, false, ['decrypt']);
-
-    try {
-        return await crypto.subtle.decrypt(alg, key, uint8ArrayContent);
-    } catch (error) {
-        return null;
-    }
+async function decryptText(hex, password) {
+    return await new Promise(
+        function (resolve, reject) {
+            triplesec.decrypt ({
+                data: new triplesec.Buffer(hex, "hex"),
+                key: new triplesec.Buffer(password),
+            }, function (err, buff) {
+                if (!err) {
+                    return resolve(buff.toString());
+                }
+                else return null;
+            });
+        }
+    );
 }
 
 async function encryptData() {
     let password = document.querySelector(".encrypt-form input").value;
-    let text = document.querySelector(".encrypt-form textarea").value;
+    let jsonString = document.querySelector(".encrypt-form textarea").value;
 
-    if (isValidJson(text)) {
-        let encryptedArray = await encryptText(text, password);
-        let encryptedText = encryptedArray.toString();
+    if (isValidJson(jsonString)) {
+        let encryptedJson = await encryptText(jsonString, password);
 
         let container = document.querySelector(".encrypted-container");
         let contentElement = container.querySelector(".encrypted-content");
-        let content = document.createTextNode(encryptedText);
+        let content = document.createTextNode(encryptedJson);
         contentElement.appendChild(content);
         container.classList.remove("hide");
     } else {
-        let errorElement = document.querySelector(".encrypt-form .error");
+        let errorElement = document.querySelector(".encrypt-form .error-message");
         errorElement.innerHTML = "Json is not valid, please fix it.";
     }
 }
@@ -80,12 +87,9 @@ async function encryptData() {
 async function decryptData() {
     let encryptedJson = await getJsonContent();
     let passwordElement = document.querySelector(".decrypt-form input");
+    let jsonString = await decryptText(encryptedJson.value, passwordElement.value);
 
-    let encryptedArray = new Uint8Array(encryptedJson.value.split(','));
-    let decryptedArray = await decryptText(encryptedArray, passwordElement.value);
-
-    if (decryptedArray !== null) {
-        let jsonString = new TextDecoder().decode(decryptedArray);
+    if (jsonString !== null) {
         if (isValidJson(jsonString)) {
             window.encryptedJson = jsonString;
             let json = JSON.parse(jsonString);
@@ -93,7 +97,7 @@ async function decryptData() {
         } else {
             let errorElement = document.querySelector(".error-message");
             errorElement.innerHTML = "Invalid JSON, fix your setup!";
-        }        
+        }
     } else {
         let errorElement = document.querySelector(".error-message");
         errorElement.innerHTML = "Wrong password, try again!";
@@ -122,7 +126,7 @@ function displayJsonData(json) {
             personTemplateClone.querySelector(".phone-numbers").appendChild(phoneTemplateClone);
         }
 
-        contentArea.appendChild(personTemplateClone);        
+        contentArea.appendChild(personTemplateClone);
     }
 
     document.querySelector(".authenticate").setAttribute("class", "hide");
