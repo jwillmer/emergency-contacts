@@ -63,7 +63,7 @@ body {
     margin: 1rem;
     background-color: #344955;
     height: 100%;
-    min-height: 80px; /* Safari */ 
+    min-height: 80px; /* Safari */
 }
 
     .encrypt-form .footer {
@@ -117,9 +117,9 @@ textarea {
     text-decoration: none;
 }
 
-.phone:last-child {
-    margin-bottom: 0;
-}
+    .phone:last-child {
+        margin-bottom: 0;
+    }
 
 .person .name {
     font-size: larger;
@@ -137,10 +137,11 @@ textarea {
     flex-direction: column;
 }
 
-    a.page-link {
-        color: white;
-        text-decoration: none;
-    }
+a.page-link {
+    color: white;
+    text-decoration: none;
+    padding-bottom: 10px;
+}
 
 .loading-container {
     position: fixed;
