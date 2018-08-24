@@ -2,10 +2,12 @@
     let encrypt = document.querySelector("#encrypt");
     if (encrypt !== null) {
         let encryptBtn = document.querySelector(".encrypt-form button");
+        let encryptPasswordInput = document.querySelector(".encrypt-form input");
         let copyBtn = document.querySelector(".encrypted-container button");
 
         encryptBtn.addEventListener("click", encryptData);
         copyBtn.addEventListener("click", copyDecryptedJsonToClipboard);
+        encryptPasswordInput.addEventListener("keypress", function (e) { if (e.key === "Enter") encryptData(); });
         InitJsonTemplate();
     }
 
@@ -67,6 +69,7 @@ async function decryptText(hex, password) {
 }
 
 async function encryptData() {
+    loading(true);
     let password = document.querySelector(".encrypt-form input").value;
     let jsonString = document.querySelector(".encrypt-form textarea").value;
 
@@ -83,9 +86,17 @@ async function encryptData() {
         let errorElement = document.querySelector(".encrypt-form .error-message");
         errorElement.innerHTML = "Json is not valid, please fix it.";
     }
+    loading(false);
+}
+
+function loading(isLoading) {
+    let container = document.querySelector(".loading-container");
+    if (isLoading) container.classList.remove("hide");
+    else container.classList.add("hide");
 }
 
 async function decryptData() {
+    loading(true);
     let encryptedJson = await getJsonContent();
     let passwordElement = document.querySelector(".decrypt-form input");
     let jsonString = await decryptText(encryptedJson.value, passwordElement.value);
@@ -104,6 +115,8 @@ async function decryptData() {
         errorElement.innerHTML = "Wrong password, try again!";
         passwordElement.value = "";
     }
+
+    loading(false);
 }
 
 function displayJsonData(json) {
