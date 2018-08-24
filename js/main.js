@@ -37,7 +37,10 @@ async function encryptText(plainText, password) {
         function (resolve, reject) {
             triplesec.encrypt({
                 data: new triplesec.Buffer(plainText),
-                key: new triplesec.Buffer(password)
+                key: new triplesec.Buffer(password),
+                //progress_hook: function (obj) {
+                //    console.log(obj);
+                //}
             }, function (err, buff) {
                 if (!err) {
                     return resolve(buff.toString('hex'));
@@ -55,9 +58,12 @@ async function encryptText(plainText, password) {
 async function decryptText(hex, password) {
     return await new Promise(
         function (resolve, reject) {
-            triplesec.decrypt ({
+            triplesec.decrypt({
                 data: new triplesec.Buffer(hex, "hex"),
                 key: new triplesec.Buffer(password),
+                //progress_hook: function (obj) {
+                //    console.log(obj);
+                //}
             }, function (err, buff) {
                 if (!err) {
                     return resolve(buff.toString());
