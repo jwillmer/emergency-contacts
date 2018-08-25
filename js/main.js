@@ -19,7 +19,7 @@
 
         decryptBtn.addEventListener("click", decryptData);
         decryptPaswordInput.addEventListener("keypress", function (e) { if (e.key === "Enter") decryptData(); });
-        copyJsonBtn.addEventListener("click", copyEncryptedJsonToClipboard);
+        copyJsonBtn.addEventListener("click", copyDecryptedJsonToClipboard);
     }
 })();
 
@@ -155,13 +155,13 @@ function displayJsonData(json) {
 
 function copyDecryptedJsonToClipboard() {
     let contentElement = document.querySelector(".encrypted-container .encrypted-content");
-    let text = contentElement.innerText;
-    navigator.clipboard.writeText(`{ "value": "${text}" }`);
-    alert("Copied data to clipboard!");
-}
+    if (contentElement != null) {
+        let text = contentElement.innerText;
+        navigator.clipboard.writeText(`{ "value": "${text}" }`);
+    } else if (window.encryptedJson) {
+        navigator.clipboard.writeText(window.encryptedJson);
+    }
 
-function copyEncryptedJsonToClipboard() {
-    navigator.clipboard.writeText(`{ "value": "${window.encryptedJson}" }`);
     alert("Copied data to clipboard!");
 }
 
