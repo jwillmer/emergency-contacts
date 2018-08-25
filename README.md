@@ -18,7 +18,7 @@ Note that the website needs to use SSL in order to work.
 | Browser      | Status      | Note                 |
 | ------------ | ----------- | -------------------- |
 | Safari 604   | works       |                      |
-| Safari 602   | not working | missing ES6 support  |
+| Safari 602   | works       |                      |
 | Chrome 68    | works       |                      |
 | Chrome 63    | works       |                      |
 | IE 10        | not working | missing ES6 support  |
